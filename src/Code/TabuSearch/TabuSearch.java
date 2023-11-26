@@ -1,4 +1,4 @@
-package Code.Tabu;
+package Code.TabuSearch;
 
 import Code.utils.Data;
 
