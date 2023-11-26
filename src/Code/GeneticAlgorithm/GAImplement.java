@@ -23,6 +23,7 @@ public class GAImplement {
 
         // Sort by decreasing of fitness
         currentGeneration = sortGeneration(currentGeneration, ga);
+        
         // Add best result to the list
         result.add(currentGeneration.get(0));
 
