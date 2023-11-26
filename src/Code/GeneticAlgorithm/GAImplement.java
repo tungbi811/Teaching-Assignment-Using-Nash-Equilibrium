@@ -16,9 +16,6 @@ import java.util.Random;
  */
 public class GAImplement {
 
-    public GAImplement() {
-    }
-
     public ArrayList<int[]> implement(GeneticAlgorithm ga) {
         ArrayList<int[]> result = new ArrayList<>();
 
@@ -79,6 +76,7 @@ public class GAImplement {
 
             double cur_best_fitness = Solution.getFitness(ga.getData(), next_generation.get(0));
             double prev_best_fitness = Solution.getFitness(ga.getData(), result.get(result.size() - 1));
+            
             // Add best solution to result
             if (prev_best_fitness <= cur_best_fitness) {
                 System.out.println("Generation: " + j + " - Fitness: " + cur_best_fitness);

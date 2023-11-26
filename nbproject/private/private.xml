@@ -5,16 +5,17 @@
         <group>
             <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/GeneticAlgorithm/GAImplement.java</file>
             <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/utils/Course.java</file>
-            <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/utils/Solution.java</file>
-            <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/Tabu/TabuSearch.java</file>
-            <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/GeneticAlgorithm/MainGA.java</file>
+            <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/utils/DistributedRandomNumberGenerator.java</file>
             <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/RL/MainRL.java</file>
             <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/utils/HypervolumeCalculator.java</file>
             <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/GeneticAlgorithm/GeneticAlgorithm.java</file>
             <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/Tabu/MainTabu.java</file>
+            <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/GeneticAlgorithm/Algorithm/Solution.java</file>
+            <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/utils/Solution.java</file>
+            <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/Tabu/TabuSearch.java</file>
+            <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/GeneticAlgorithm/MainGA.java</file>
             <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/RL/Q_learning.java</file>
             <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/utils/Data.java</file>
-            <file>file:/C:/Users/tungd/OneDrive/Documents/JavaProjects/TeachingAssignment/src/Code/GeneticAlgorithm/Algorithm/Solution.java</file>
         </group>
     </open-files>
 </project-private>
