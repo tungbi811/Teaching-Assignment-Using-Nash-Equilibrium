@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Code.RL;
 
 import Code.utils.Data;
@@ -58,7 +54,7 @@ public class Q_learning {
                 int action = actionList.get(index);
                 actionList.remove(index);
 
-                if (Solution.pass_all_constraint(data, instructor_total_course, instructor_timeslot, state, state)) {
+                if (Solution.passAllConstraint(data, instructor_total_course, instructor_timeslot, state, state)) {
                     return action;
                 } else {
                     Q[state][action] -= alpha;
@@ -79,7 +75,7 @@ public class Q_learning {
                     }
                 }
 
-                if (Solution.pass_all_constraint(data, instructor_total_course, instructor_timeslot, state, state)) {
+                if (Solution.passAllConstraint(data, instructor_total_course, instructor_timeslot, state, state)) {
                     return action;
                 } else {
                     Q[state][action] -= alpha;

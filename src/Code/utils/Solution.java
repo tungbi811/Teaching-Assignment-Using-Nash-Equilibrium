@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Code.utils;
 
 import java.io.FileOutputStream;
@@ -19,68 +15,68 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class Solution {
 
     // 3. An instructor cannot be assigned to teach different classes in the same time slot
-    public static boolean pass_constraint_3(Data data, int[][] instructor_timeslot, int course, int instructor) {
+    public static boolean passConstraint3(Data data, int[][] instructorTimeslot, int course, int instructor) {
         int time_slot_id = data.courses[course].getSlotId();
-        return instructor_timeslot[instructor][time_slot_id] == 0;
+        return instructorTimeslot[instructor][time_slot_id] == 0;
     }
 
     // 4. Do not assign instructors to teach the subjects they have absolutely no interest in teaching
-    public static boolean pass_constraint_4(Data data, int course, int instructor) {
+    public static boolean passConstraint4(Data data, int course, int instructor) {
         return data.E[instructor][course] != 0;
     }
 
     // 5. Do not assign an instructor to teach the subjects they cannot ensure the quantity
-    public static boolean pass_constraint_5(Data data, int course, int instructor) {
+    public static boolean passConstraint5(Data data, int course, int instructor) {
         return data.F[instructor][course] != 0;
     }
 
     // 6. Do not assign an instructor to teach in time slots they cannot teach
-    public static boolean pass_constraint_6(Data data, int course, int instructor) {
+    public static boolean passConstraint6(Data data, int course, int instructor) {
         return data.H[instructor][course] != 0;
     }
 
     // 7. Do not assign an instructor to teach fewer classes than the minimum number they are required to teach
-    public static boolean pass_constraint_7(Data data, int[] instructor_total_course, int course, int instructor) {
-        instructor_total_course[instructor] += 1;
+    public static boolean passConstraint7(Data data, int[] instructorTotalCourse, int course, int instructor) {
+        instructorTotalCourse[instructor] += 1;
         int total_course_need = 0;
         int total_assigned_course = 0;
 
         for (int i = 0; i < data.Ng; i++) {
-            total_course_need += Integer.max(0, data.MinC[i] - instructor_total_course[i]);
-            total_assigned_course += instructor_total_course[i];
+            total_course_need += Integer.max(0, data.MinC[i] - instructorTotalCourse[i]);
+            total_assigned_course += instructorTotalCourse[i];
         }
 
         int remain_course = data.Nc - total_assigned_course;
-        instructor_total_course[instructor] -= 1;
+        instructorTotalCourse[instructor] -= 1;
         return total_course_need <= remain_course;
     }
 
     // 8. Do not assign an instructor to teach more classes than the maximum number they are allowed to teach
-    public static boolean pass_constraint_8(Data data, int[] instructor_total_course, int course, int instructor) {
-        return instructor_total_course[instructor] < data.MaxC[instructor];
+    public static boolean passConstraint8(Data data, int[] instructorTotalCourse, int course, int instructor) {
+        return instructorTotalCourse[instructor] < data.MaxC[instructor];
     }
 
-    public static boolean pass_all_constraint(Data data, int[] instructor_total_course, int[][] instructor_timeslot, int course, int instructor) {
-        return pass_constraint_3(data, instructor_timeslot, course, instructor)
-                && pass_constraint_4(data, course, instructor)
-                && pass_constraint_5(data, course, instructor)
-                && pass_constraint_6(data, course, instructor)
-                && pass_constraint_7(data, instructor_total_course, course, instructor)
-                && pass_constraint_8(data, instructor_total_course, course, instructor);
+    public static boolean passAllConstraint(Data data, int[] instructorTotalCourse, int[][] instructorTimeslot, int course, int instructor) {
+        return passConstraint3(data, instructorTimeslot, course, instructor)
+                && passConstraint4(data, course, instructor)
+                && passConstraint5(data, course, instructor)
+                && passConstraint6(data, course, instructor)
+                && passConstraint7(data, instructorTotalCourse, course, instructor)
+                && passConstraint8(data, instructorTotalCourse, course, instructor);
     }
 
-    public boolean pass_all_constraint(Data data, int[] D) {
-        int[] instructor_total_course = new int[data.Nc];
-        int[][] instructor_timeslot = new int[data.Ng][data.Nt];
+    public boolean passAllConstraint(Data data, int[] D) {
+        int[] instructorTotalCourse = new int[data.Nc];
+        int[][] instructorTimeslot = new int[data.Ng][data.Nt];
 
         for (int i = 0; i < data.Nc; i++) {
             int instructor = D[i];
-            if (!pass_all_constraint(data, instructor_total_course, instructor_timeslot, i, instructor)) {
+            if (!passAllConstraint(data, instructorTotalCourse, instructorTimeslot, i, instructor)) {
                 return false;
             }
-            instructor_total_course[instructor] += 1;
-            int timeslot_id = data.courses[i].getSlotId();
-            instructor_timeslot[instructor][timeslot_id] = 1;
+            instructorTotalCourse[instructor] += 1;
+            int timeslotId = data.courses[i].getSlotId();
+            instructorTimeslot[instructor][timeslotId] = 1;
         }
         return true;
     }
@@ -88,29 +84,29 @@ public class Solution {
     // Generate new solution
     public static int[] initSolution(Data data) {
         int[] gen = new int[data.Nc];
-        int[] instructor_total_course = new int[data.Ng];
-        int[][] instructor_timeslot = new int[data.Ng][data.Nt];
-        int random_instructor;
+        int[] instructorTotalCourse = new int[data.Ng];
+        int[][] instructorTimeslot = new int[data.Ng][data.Nt];
+        int randomInstructor;
 
         for (int i = 0; i < data.Nc; i++) {
             DistributedRandomNumberGenerator rnd = new DistributedRandomNumberGenerator();
             for (int j = 0; j < data.Ng; j++) {
-                if (pass_constraint_4(data, i, j) && pass_constraint_5(data, i, j)
-                        && pass_constraint_6(data, i, j) && pass_constraint_3(data, instructor_timeslot, i, j)
-                        && pass_constraint_8(data, instructor_total_course, i, j)) {
+                if (passConstraint4(data, i, j) && passConstraint5(data, i, j)
+                        && passConstraint6(data, i, j) && passConstraint3(data, instructorTimeslot, i, j)
+                        && passConstraint8(data, instructorTotalCourse, i, j)) {
                     rnd.addNumber(j, 0.1);
                 }
             }
-            random_instructor = rnd.getDistributedRandomNumber();
-            gen[i] = random_instructor;
-            instructor_total_course[random_instructor] += 1;
-            int timeslot_id = data.courses[i].getSlotId();
-            instructor_timeslot[random_instructor][timeslot_id] = 1;
+            randomInstructor = rnd.getDistributedRandomNumber();
+            gen[i] = randomInstructor;
+            instructorTotalCourse[randomInstructor] += 1;
+            int timeslotId = data.courses[i].getSlotId();
+            instructorTimeslot[randomInstructor][timeslotId] = 1;
         }
         return gen;
     }
 
-    public int[] level_subject_preference(Data data, int[] D) {
+    public int[] levelSubjectPreference(Data data, int[] D) {
         int[] result = new int[data.Ng];
         for (int i = 0; i < data.Nc; i++) {
             result[D[i]] += data.E[D[i]][i];
@@ -118,7 +114,7 @@ public class Solution {
         return result;
     }
 
-    public int[] level_timeslot_preference(Data data, int[] D) {
+    public int[] levelTimeslotPreference(Data data, int[] D) {
         int[] result = new int[data.Ng];
         for (int i = 0; i < data.Nc; i++) {
             result[D[i]] += data.H[D[i]][i];
@@ -126,7 +122,7 @@ public class Solution {
         return result;
     }
 
-    public static double cal_payoff_p0(Data data, int[] D) {
+    public static double calPayoffP0(Data data, int[] D) {
         double payoff_p0 = 0;
         for (int i = 0; i < data.Nc; i++) {
             payoff_p0 += data.F[D[i]][i];
@@ -134,22 +130,22 @@ public class Solution {
         return payoff_p0;
     }
 
-    public static double[] cal_payoff_pi(Data data, int[] D) {
+    public static double[] calPayoffPi(Data data, int[] D) {
         double w1 = 1.0 / 3.0;
         double w2 = 1.0 / 3.0;
         double w3 = 1.0 / 3.0;
         int instructor;
         double[] payoff_pi = new double[data.Ng];
-        int[] instructor_total_course = new int[data.Ng];
+        int[] instructorTotalCourse = new int[data.Ng];
 
         for (int i = 0; i < data.Nc; i++) {
             instructor = D[i];
             payoff_pi[instructor] += w1 * (double) data.E[instructor][i] + w2 * (double) data.H[instructor][i];
-            instructor_total_course[instructor] += 1;
+            instructorTotalCourse[instructor] += 1;
         }
 
         for (int i = 0; i < data.Ng; i++) {
-            payoff_pi[i] += w3 * (10 - Math.abs(data.K[i] - instructor_total_course[i]));
+            payoff_pi[i] += w3 * (10 - Math.abs(data.K[i] - instructorTotalCourse[i]));
         }
 
         return payoff_pi;
@@ -162,22 +158,22 @@ public class Solution {
         double w4 = 0.5;
         double w5 = 0.5;
         double fitness = 0;
-        int[] instructor_total_course = new int[data.Ng];
-        int[][] instructor_timeslot = new int[data.Ng][data.Nt];
+        int[] instructorTotalCourse = new int[data.Ng];
+        int[][] instructorTimeslot = new int[data.Ng][data.Nt];
         boolean pass_contraint = true;
 
         for (int i = 0; i < data.Nc; i++) {
             int instructor = chromosome[i];
-            if (!pass_all_constraint(data, instructor_total_course, instructor_timeslot, i, instructor)) {
+            if (!passAllConstraint(data, instructorTotalCourse, instructorTimeslot, i, instructor)) {
                 pass_contraint = false;
                 break;
             }
             fitness += w4 * data.F[instructor][i] + w5 * (w1 * data.E[instructor][i] + w2 * data.H[instructor][i]);
-            instructor_total_course[instructor] += 1;
-            instructor_timeslot[instructor][data.courses[i].getSlotId()] = 1;
+            instructorTotalCourse[instructor] += 1;
+            instructorTimeslot[instructor][data.courses[i].getSlotId()] = 1;
         }
         for (int i = 0; i < data.Ng; i++) {
-            fitness += w5 * w3 * (10 - Math.abs(data.K[i] - instructor_total_course[i]));
+            fitness += w5 * w3 * (10 - Math.abs(data.K[i] - instructorTotalCourse[i]));
         }
         if (!pass_contraint) {
             return fitness / 10000;
@@ -210,8 +206,8 @@ public class Solution {
             row = sheet.createRow(++rowCount);
 
             cell = row.createCell(0);
-            cell.setCellValue(Solution.cal_payoff_p0(data, s));
-            double[] payoff_pi = Solution.cal_payoff_pi(data, s);
+            cell.setCellValue(Solution.calPayoffP0(data, s));
+            double[] payoff_pi = Solution.calPayoffPi(data, s);
             for (int i = 1; i <= data.Ng; i++) {
                 cell = row.createCell(i);
                 cell.setCellValue(payoff_pi[i - 1]);
@@ -228,5 +224,12 @@ public class Solution {
             workbook.write(outputStream);
             outputStream.close();
         }
+    }
+    
+    public static void display(int[] solution){
+        for (int i : solution) {
+            System.out.print(i + ", ");
+        }
+        System.out.println("");
     }
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Code.GeneticAlgorithm;
 
 import Code.utils.Solution;
@@ -43,6 +39,7 @@ public class GAImplement {
     private ArrayList<int[]> iterationGeneration(ArrayList<int[]> currentGeneration, ArrayList<int[]> result, GeneticAlgorithm ga) {
         Random random = new Random();
         int randomNum1, randomNum2;
+        
         // iteration
         for (int j = 0; j < ga.getNumberIteration(); j++) {
             // Selection keep top 30 best solutions to new generation
@@ -90,10 +87,8 @@ public class GAImplement {
             currentGeneration = new ArrayList<>(next_generation);
         }
         int[] best_chromosome = result.get(result.size() - 1);
+        Solution.display(best_chromosome);
         System.out.println(Solution.getFitness(ga.getData(), best_chromosome));
-        for (int i : best_chromosome) {
-            System.out.print(i + ", ");
-        }
         return result;
     }
 
