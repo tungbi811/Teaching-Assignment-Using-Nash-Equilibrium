@@ -1,4 +1,4 @@
-package Code.RL;
+package Code.QLearning;
 
 import Code.utils.Data;
 import Code.utils.Solution;

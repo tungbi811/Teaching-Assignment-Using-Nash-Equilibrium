@@ -1,4 +1,4 @@
-package Code.RL;
+package Code.QLearning;
 
 import Code.utils.Data;
 import Code.utils.Solution;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author tungd
  */
-public class MainRL {
+public class MainQLearning {
 
     public static void main(String[] args) throws IOException {
         Data data = Data.readDataFromFrile();
