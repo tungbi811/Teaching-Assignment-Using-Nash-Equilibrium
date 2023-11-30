@@ -54,7 +54,7 @@ public class Data {
     
     public static Sheet loadData(String fileName, int sheetNum) throws FileNotFoundException, IOException{
         String workingDirectory = System.getProperty("user.dir");
-        String dataDir = workingDirectory + "//data//";
+        String dataDir = workingDirectory + "//new data//";
         String excelFilePath = dataDir + fileName;
         InputStream inputStream = new FileInputStream(new File(excelFilePath));
         Workbook workbook = new XSSFWorkbook(inputStream);
@@ -67,7 +67,7 @@ public class Data {
         Sheet instructors = loadData("data_T.xlsx", 0);
         Sheet courses = loadData("sp22_to_import.xlsx", 0);
         Sheet instructor_timeslot_preference = loadData("data_FSlot_T.xlsx", 0);
-        Sheet instructor_subject_preference = loadData("data_FSlot_S.xlsx", 1);
+        Sheet instructor_subject_preference = loadData("data_FSlot_S.xlsx", 0);
         Sheet teaching_quantity = loadData("data_Rating.xlsx", 0);
         
         int Nc = courses.getLastRowNum();

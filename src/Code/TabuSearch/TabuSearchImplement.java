@@ -12,14 +12,23 @@ import java.util.Random;
 public class TabuSearchImplement {
 
     TabuSearch tabuSearch;
-
+    private int[] bestSolution;
+            
     public TabuSearchImplement(TabuSearch tabuSearch) {
         this.tabuSearch = tabuSearch;
     }
 
+    public int[] getBestSolution() {
+        return bestSolution;
+    }
+
+    public void setBestSolution(int[] bestSolution) {
+        this.bestSolution = bestSolution;
+    }
+    
     public ArrayList<int[]> implement() {
         int[] initialSolution = Solution.initSolution(tabuSearch.getData());
-        int[] bestSolution = initialSolution;
+        bestSolution = initialSolution;
         double bestSolutionFitness = Solution.getFitness(tabuSearch.getData(), bestSolution);
         int[] currentSolution = initialSolution;
         ArrayList<int[]> tabuList = new ArrayList();
